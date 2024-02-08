@@ -69,6 +69,10 @@ def get_db() -> connection.MySQLConnection:
     host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
     database = os.getenv("PERSONAL_DATA_DB_NAME")
 
-    return connection.MySQLConnection(
+    try:
+        db_connection = connection.MySQLConnection(
         user=username, password=password,
         host=host, database=database)
+        return db_connection
+    except Exception:
+        return None
