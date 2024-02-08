@@ -39,6 +39,7 @@ class RedactingFormatter(logging.Formatter):
                                   self.SEPARATOR)
         return super().format(record)
 
+
 PII_FIELDS = ("email", "password", "ssn", "phone", "name")
 
 
