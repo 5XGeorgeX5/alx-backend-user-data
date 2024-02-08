@@ -3,6 +3,8 @@
 from typing import List
 import re
 import logging
+import os
+from mysql.connector import connection
 
 
 def filter_datum(
@@ -58,3 +60,15 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stream_handler)
 
     return logger
+
+
+def get_db() -> connection.MySQLConnection:
+    """Returns a connector to the database"""
+    username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    database = os.getenv("PERSONAL_DATA_DB_NAME")
+
+    return connection.MySQLConnection(
+        user=username, password=password,
+        host=host, database=database)
