@@ -4,6 +4,7 @@ from typing import List
 import re
 import logging
 import os
+from os import environ
 from mysql.connector import connection
 
 
@@ -69,10 +70,6 @@ def get_db() -> connection.MySQLConnection:
     host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
     database = os.getenv("PERSONAL_DATA_DB_NAME")
 
-    try:
-        db_connection = connection.MySQLConnection(
+    return connection.MySQLConnection(
         user=username, password=password,
         host=host, database=database)
-        return db_connection
-    except Exception:
-        return None
