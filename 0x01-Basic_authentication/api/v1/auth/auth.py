@@ -25,7 +25,6 @@ class Auth():
             elif path.startswith(excluded[:-1]):
                 return False
         return True
-            
 
     def authorization_header(self, request=None) -> str:
         """validates all requests to secure the API"""
