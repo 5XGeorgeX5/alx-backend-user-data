@@ -6,7 +6,11 @@ from models.user import User
 from os import getenv
 
 
-@app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
+@app_views.route(
+        '/auth_session/login',
+        methods=['POST'],
+        strict_slashes=False
+        )
 def session_login():
     """POST /api/v1/auth_session/login"""
     email = request.form.get('email')
@@ -33,7 +37,11 @@ def session_login():
     return response
 
 
-@app_views.route('auth_session/logout', methods=['DELETE'], strict_slashes=False)
+@app_views.route(
+        'auth_session/logout',
+        methods=['DELETE'],
+        strict_slashes=False
+        )
 def session_logout():
     """DELETE /api/v1/auth_session/logout"""
     from api.v1.app import auth
