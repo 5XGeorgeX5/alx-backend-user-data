@@ -23,7 +23,10 @@ class SessionDBAuth(SessionExpAuth):
 
     def user_id_for_session_id(self, session_id=None):
         """Overload the user id for session id method"""
-        user = UserSession.search({'session_id': session_id})
+        try:
+            user = UserSession.search({'session_id': session_id})
+        except Exception:
+            return None
         if not user:
             return None
         if self.session_duration <= 0:
@@ -40,7 +43,10 @@ class SessionDBAuth(SessionExpAuth):
         session_id = self.session_cookie(request)
         if session_id is None:
             return False
-        user = UserSession.search({'session_id': session_id})
+        try:
+            user = UserSession.search({'session_id': session_id})
+        except Exception:
+            return False
         if not user:
             return False
         user[0].remove()
